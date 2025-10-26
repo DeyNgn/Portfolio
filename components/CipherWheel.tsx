@@ -42,6 +42,27 @@ const CipherWheel: React.FC<CipherWheelProps> = ({
     }
   };
   
+  const handleTouchStart = () => {
+    setIsDragging(true);
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<SVGSVGElement>) => {
+    if (isDragging && wheelRef.current) {
+      const rect = wheelRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const touch = e.touches[0];
+      const angle =
+        Math.atan2(touch.clientY - centerY, touch.clientX - centerX) *
+        (180 / Math.PI);
+      setRotation(angle);
+    }
+  };
+
   const innerRotationAngle = rotation + 90;
 
   return (
@@ -55,7 +76,10 @@ const CipherWheel: React.FC<CipherWheelProps> = ({
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseLeave}
         onMouseMove={handleMouseMove}
-        className="cursor-pointer select-none" 
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onTouchMove={handleTouchMove}
+        className="cursor-pointer select-none"
       >
         <circle cx="150" cy="150" r="140" fill="#282c34" stroke="white" strokeWidth="2" />
         <circle cx="150" cy="150" r="100" fill="#282c34" stroke="white" strokeWidth="2" />
