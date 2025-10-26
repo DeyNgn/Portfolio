@@ -61,6 +61,7 @@ export default function Home() {
         fontFamily: 'monospace',
       }}
     >
+      <h1 style={{ fontSize: '3rem', marginBottom: '2rem' }}>Cyber Portfolio</h1>
       <div style={{ textAlign: 'center', border: '2px solid white', padding: '2rem', display: 'flex', alignItems: 'center' }}>
         <div>
           <h1 style={{ fontSize: '2.5rem' }}>

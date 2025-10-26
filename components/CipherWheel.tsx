@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useState, useRef } from "react";
 
 interface CipherWheelProps {
@@ -105,6 +105,13 @@ const CipherWheel: React.FC<CipherWheelProps> = ({
         })}
 
         <g transform={`rotate(${innerRotationAngle}, 150, 150)`}>
+          <image
+            x="70"
+            y="70"
+            width="160"
+            height="160"
+            href="/images/laughing-man.png"
+          />
           {Array.from({ length: 26 }, (_, i) => {
             const angle = (i * 360) / 26 - 90;
             const x = 150 + 80 * Math.cos(angle * (Math.PI / 180));
