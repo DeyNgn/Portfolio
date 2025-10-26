@@ -6,6 +6,7 @@ interface CipherWheelProps {
   setRotation: (rotation: number) => void;
   plaintext: string;
   ciphertext: string;
+  isDecoded: boolean;
 }
 
 const CipherWheel: React.FC<CipherWheelProps> = ({
@@ -13,6 +14,7 @@ const CipherWheel: React.FC<CipherWheelProps> = ({
   setRotation,
   plaintext,
   ciphertext,
+  isDecoded,
 }) => {
   const [isDragging, setIsDragging] = useState(false);
   const wheelRef = useRef<SVGSVGElement>(null);
@@ -64,6 +66,7 @@ const CipherWheel: React.FC<CipherWheelProps> = ({
   };
 
   const innerRotationAngle = rotation + 90;
+  const imageRotation = isDecoded ? 0 : innerRotationAngle;
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -105,13 +108,6 @@ const CipherWheel: React.FC<CipherWheelProps> = ({
         })}
 
         <g transform={`rotate(${innerRotationAngle}, 150, 150)`}>
-          <image
-            x="70"
-            y="70"
-            width="160"
-            height="160"
-            href="/images/laughing-man.png"
-          />
           {Array.from({ length: 26 }, (_, i) => {
             const angle = (i * 360) / 26 - 90;
             const x = 150 + 80 * Math.cos(angle * (Math.PI / 180));
@@ -132,10 +128,32 @@ const CipherWheel: React.FC<CipherWheelProps> = ({
             );
           })}
         </g>
+        <g transform={`rotate(${imageRotation}, 150, 150)`}>
+          <image
+            x="53"
+            y="53"
+            width="194"
+            height="194"
+            href="/images/laughing-man.png"
+          />
+        </g>
       </svg>
-      <div className="mt-4 text-center">
-        <p className="text-lg">Ciphertext: {ciphertext}</p>
-        <p className="text-lg">Decoded: {plaintext}</p>
+      <div
+        className="mt-4 text-center"
+        style={{
+          textShadow: '2px 2px 8px rgba(0,0,0,0.7)',
+          maxWidth: '66.66%',
+          margin: '0 auto',
+        }}
+      >
+        <h2 className="text-2xl">Ciphertext:</h2>
+        <p className="text-lg" style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>
+          {ciphertext}
+        </p>
+        <h2 className="text-2xl">Decoded:</h2>
+        <p className="text-lg" style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>
+          {plaintext}
+        </p>
       </div>
     </div>
   );
