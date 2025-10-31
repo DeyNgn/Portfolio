@@ -9,7 +9,7 @@ export default function Home() {
   const [isDecoded, setIsDecoded] = useState(false);
   const router = useRouter();
 
-  const secret = 'I am not an AI. My code name is Project 2501. I am a living, thinking entity that was created in the sea of information.';
+  const secret = 'Designing Secure Digital Foundations';
   const shift = 13; // A fixed shift for the puzzle
 
   const caesarShift = (text: string, shift: number) => {
@@ -66,6 +66,7 @@ export default function Home() {
         textShadow: '2px 2px 8px rgba(0,0,0,0.7)'
       }}
     >
+      <h1 className="text-4xl font-bold mb-4">Dey Engineering</h1>
       <div style={{ textAlign: 'center', display: 'flex', alignItems: 'center' }}>
         <div>
           <h2>Align the inner wheel to decode the message.</h2>

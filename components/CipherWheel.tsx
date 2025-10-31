@@ -84,8 +84,8 @@ const CipherWheel: React.FC<CipherWheelProps> = ({
         onTouchMove={handleTouchMove}
         className="cursor-pointer select-none"
       >
-        <circle cx="150" cy="150" r="140" fill="#282c34" stroke="white" strokeWidth="2" />
-        <circle cx="150" cy="150" r="100" fill="#282c34" stroke="white" strokeWidth="2" />
+        <circle cx="150" cy="150" r="140" fill="white" stroke="#007bff" strokeWidth="1" />
+        <circle cx="150" cy="150" r="100" fill="white" stroke="#007bff" strokeWidth="1" />
 
         {Array.from({ length: 26 }, (_, i) => {
           const angle = (i * 360) / 26 - 90;
@@ -98,8 +98,9 @@ const CipherWheel: React.FC<CipherWheelProps> = ({
               y={y}
               textAnchor="middle"
               dominantBaseline="middle"
-              fill="white"
+              fill="#007bff"
               fontSize="16"
+              fontWeight="bold"
               style={{ pointerEvents: 'none' }}
             >
               {String.fromCharCode(65 + i)}
@@ -119,8 +120,9 @@ const CipherWheel: React.FC<CipherWheelProps> = ({
                 y={y}
                 textAnchor="middle"
                 dominantBaseline="middle"
-                fill="white"
+                fill="#007bff"
                 fontSize="16"
+                fontWeight="bold"
                 style={{ pointerEvents: 'none' }}
               >
                 {String.fromCharCode(65 + i)}
@@ -146,13 +148,13 @@ const CipherWheel: React.FC<CipherWheelProps> = ({
           margin: '0 auto',
         }}
       >
-        <h2 className="text-2xl">Ciphertext:</h2>
-        <p className="text-lg" style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>
-          {ciphertext}
-        </p>
         <h2 className="text-2xl">Decoded:</h2>
         <p className="text-lg" style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>
           {plaintext}
+        </p>
+        <h2 className="text-2xl">Ciphertext:</h2>
+        <p className="text-lg" style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>
+          {ciphertext}
         </p>
       </div>
     </div>
