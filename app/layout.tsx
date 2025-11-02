@@ -1,18 +1,20 @@
-import type { Metadata } from 'next';
+'use client';
+import './globals.css';
+import {Providers} from "./providers";
 
-export const metadata: Metadata = {
-  title: 'Next.js on GitHub Pages',
-  description: 'Deploy your static Next.js site to GitHub Pages.',
-};
+export default function RootLayout({ children }: { children: React.ReactNode }) {
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <head>
+        <title>Dey Engineering</title>
+        <meta name="description" content="Developing secure digital foundations." />
+      </head>
+      <body>
+        <Providers>
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }

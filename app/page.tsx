@@ -7,9 +7,10 @@ export default function Home() {
   const [rotation, setRotation] = useState(0);
   const [decoded, setDecoded] = useState('');
   const [isDecoded, setIsDecoded] = useState(false);
+  const [displayedText, setDisplayedText] = useState('');
   const router = useRouter();
 
-  const secret = 'Designing Secure Digital Foundations';
+  const secret = 'Developing Secure Digital Foundations';
   const shift = 13; // A fixed shift for the puzzle
 
   const caesarShift = (text: string, shift: number) => {
@@ -35,6 +36,17 @@ export default function Home() {
   const ciphertext = caesarShift(secret, shift);
 
   useEffect(() => {
+    const texts = [secret, ciphertext, 'D3v3l0p!ng S3cUr3 D!g!t@l F0uNd@t!0n$'];
+    let currentIndex = 0;
+    const interval = setInterval(() => {
+      setDisplayedText(texts[currentIndex]);
+      currentIndex = (currentIndex + 1) % texts.length;
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
     const visualRotation = rotation + 90;
     const currentShift = Math.round(visualRotation / (360 / 26));
     const decodedText = caesarShift(ciphertext, -currentShift);
@@ -43,7 +55,7 @@ export default function Home() {
     if (decodedText.toLowerCase() === secret.toLowerCase()) {
       setIsDecoded(true);
       const timer = setTimeout(() => {
-        router.push('/portfolio');
+        router.push('/home?fromCipher=true');
       }, 2000);
       return () => clearTimeout(timer);
     } else {
@@ -67,6 +79,7 @@ export default function Home() {
       }}
     >
       <h1 className="text-4xl font-bold mb-4">Dey Engineering</h1>
+      <h2 className="text-2xl mb-8">{displayedText}</h2>
       <div style={{ textAlign: 'center', display: 'flex', alignItems: 'center' }}>
         <div>
           <h2>Align the inner wheel to decode the message.</h2>
